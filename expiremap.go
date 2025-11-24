@@ -169,6 +169,13 @@ func (m *Map[K, V]) Clear() {
 	m.wakeCleaner()
 }
 
+func (m *Map[K, V]) Has(key K) bool {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	_, exists := m.m[key]
+	return exists
+}
+
 func (m *Map[K, V]) Keys() []K {
 	m.mu.Lock()
 	defer m.mu.Unlock()
