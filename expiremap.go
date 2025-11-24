@@ -4,6 +4,7 @@ import (
 	"container/heap"
 	"context"
 	"expiremap/timequeue"
+	"iter"
 	"sync"
 	"time"
 )
@@ -175,4 +176,16 @@ func (m *Map[K, V]) Keys() []K {
 		keys = append(keys, key)
 	}
 	return keys
+}
+
+func (m *Map[K, V]) Iter() iter.Seq2[K, V] {
+	return func(yield func(K, V) bool) {
+		m.mu.Lock()
+		defer m.mu.Unlock()
+		for k, v := range m.m {
+			if !yield(k, v.value) {
+				return
+			}
+		}
+	}
 }
