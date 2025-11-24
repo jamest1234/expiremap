@@ -3,10 +3,11 @@ package expiremap
 import (
 	"container/heap"
 	"context"
-	"expiremap/timequeue"
 	"iter"
 	"sync"
 	"time"
+
+	"github.com/jamest1234/expiremap/timequeue"
 )
 
 type entry[K comparable, V any] struct {

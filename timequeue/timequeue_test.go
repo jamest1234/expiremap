@@ -2,9 +2,10 @@ package timequeue_test
 
 import (
 	"container/heap"
-	"expiremap/timequeue"
 	"testing"
 	"time"
+
+	"github.com/jamest1234/expiremap/timequeue"
 )
 
 func TestTimeQueue(t *testing.T) {
